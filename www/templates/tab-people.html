@@ -1,0 +1,17 @@
+<ion-view view-title="People">
+  <ion-content class="padding">
+    <h3>My company</h3>
+    
+    <ion-item class="item-remove-animate" ng-repeat="name in names">
+      <h2>{{name}}</h2>
+      <ion-option-button class="button-assertive" ng-click="removeName(name)">
+      Remove
+      </ion-option-button>
+    </ion-item>
+
+    <form ng-submit="addName()">
+      <input type="text" placeholder="Name" ng-model="enteredName">
+      <input type="submit" value="Add people">
+    </form>
+  </ion-content>
+</ion-view>
