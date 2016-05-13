@@ -50,7 +50,7 @@ angular.module('starter.services', [])
 })
 
 
-.factory('People', function() {
+.factory('People', function($http, $rootScope, $stateParams) {
   var names = ['Tcherno', 'Aissira', 'Fred', 'Amandine'];
 
   return {
@@ -59,10 +59,26 @@ angular.module('starter.services', [])
     },
     add: function(name) {
       names.push(name);
-      name = '';
     },
     remove: function(name) {
       names.splice(names.indexOf(name), 1);
+    },
+    get: function(query) {
+      // var defer = $q.defer();
+
+      $http.get('https://api.spotify.com/v1/search', { 
+        params: {q: query, type: 'album'}
+      })
+      .then(function(response) {
+        return response.data;
+      //  if (response.albums) {
+      //    defer.resolve(response.albums.items);
+      //  }
+      // }, function(error) {
+      //   defer.reject(error);
+      });
+
+      // return defer.promise;
     }
   }
 

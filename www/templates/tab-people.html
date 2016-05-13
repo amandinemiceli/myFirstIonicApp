@@ -2,16 +2,28 @@
   <ion-content class="padding">
     <h3>My company</h3>
     
-    <ion-item class="item-remove-animate" ng-repeat="name in names">
-      <h2>{{name}}</h2>
-      <ion-option-button class="button-assertive" ng-click="removeName(name)">
-      Remove
-      </ion-option-button>
-    </ion-item>
+    Recherche d'albums pour : {{query}}
 
-    <form ng-submit="addName()">
-      <input type="text" placeholder="Name" ng-model="enteredName">
-      <input type="submit" value="Add people">
+    <form ng-submit="search()">
+      <input type="text" placeholder="Album" ng-model="query">
+      <input type="submit" value="Search">
     </form>
+
+    {{data}}
+
+    <div>You entered: {{enteredName}}</div>
+
+    <form ng-submit="add()">
+      <input type="text" placeholder="Name" ng-model="enteredName">
+      <input type="submit" value="Add name">
+    </form>
+
+    <ion-list ng-repeat="name in all">
+      <ion-item href="#">{{name}}
+        <ion-option-button class="button-assertive" ng-click="remove(chat)">
+          Delete
+        </ion-option-button>
+      </ion-item>
+    </ion-list> 
   </ion-content>
 </ion-view>

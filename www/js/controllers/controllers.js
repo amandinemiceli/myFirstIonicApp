@@ -4,6 +4,7 @@ angular.module('starter.controllers', [])
 
 .controller('ChatsCtrl', function($scope, Chats) {
   $scope.chats = Chats.all();
+
   $scope.remove = function(chat) {
     Chats.remove(chat);
   };
@@ -14,13 +15,26 @@ angular.module('starter.controllers', [])
 })
 
 .controller('PeopleCtrl', function($scope, People) {
-  $scope.names = People.all();
-  $scope.addName = function() {
-    People.add($scope.enteredName);
-  };
-  $scope.removeName = function(name) {
+  $scope.all = People.all();
+
+  $scope.add = function() {
+    People.add(this.enteredName);
+    this.enteredName = '';
+  }
+  $scope.remove = function(name) {
     People.remove(name);
-  };
+  }
+  $scope.search = function() {
+    if (this.query) {
+      People.get(this.query).then(function(data) {
+        $scope.data = data;
+        console.log(data);
+      }).catch(function() {
+        $scope.error = 'unable to get data';
+      });
+      this.query = '';
+    }
+  }
 })
 
 .controller('AccountCtrl', function($scope) {
